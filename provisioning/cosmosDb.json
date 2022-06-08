@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "databaseAccounts_test_cdb_tof_name": {
+      "defaultValue": "test-cdb-tof",
+      "type": "String"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.DocumentDB/databaseAccounts",
+      "apiVersion": "2021-10-15",
+      "name": "[parameters('databaseAccounts_test_cdb_tof_name')]",
+      "location": "North Europe",
+      "kind": "GlobalDocumentDB",
+      "properties": {
+        "publicNetworkAccess": "Enabled",
+        "enableAutomaticFailover": false,
+        "enableMultipleWriteLocations": false,
+        "isVirtualNetworkFilterEnabled": false,
+        "disableKeyBasedMetadataWriteAccess": false,
+        "enableFreeTier": true,
+        "enableAnalyticalStorage": false,
+        "analyticalStorageConfiguration": {
+          "schemaType": "WellDefined"
+        },
+        "databaseAccountOfferType": "Standard",
+        "defaultIdentity": "FirstPartyIdentity",
+        "networkAclBypass": "None",
+        "disableLocalAuth": false,
+        "consistencyPolicy": {
+          "defaultConsistencyLevel": "Session",
+          "maxIntervalInSeconds": 5,
+          "maxStalenessPrefix": 100
+        },
+        "locations": [
+          {
+            "locationName": "North Europe",
+            "provisioningState": "Succeeded",
+            "failoverPriority": 0,
+            "isZoneRedundant": false
+          }
+        ]
+      }
+    }
+  ]
+}
+
+
